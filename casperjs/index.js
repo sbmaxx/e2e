@@ -16,16 +16,24 @@ casper.test.begin('yandex.images index', function(test) {
 
         this.click('.search .button');
 
-        this.wait(1000, function() {
-            test.assertTitleMatches(/bmw: \d+ тыс изображений найдено в Яндекс.Картинках/, 'should do search');
-        });
+    });
 
+    casper.waitUntilVisible('.serp-list_type_search', function() {
+        test.assertTitleMatches(/bmw: \d+ тыс изображений найдено в Яндекс.Картинках/, 'should do search');
+    });
+
+    casper.then(function() {
         this.scrollToBottom();
+    })
 
-        this.wait(1000, function() {
-            test.assertVisible('.more_direction_next', 'more button should be visible after scroll');
+    for(var i = 0; i < 4; i++) {
+        casper.waitWhileVisible('.more_direction_next .spinner', function() {
+            this.scrollToBottom();
         });
+    }
 
+    casper.waitUntilVisible('.more_direction_next .button', function() {
+        test.assert(true, 'more button should be visible after scroll');
     });
 
     casper.run(function() {
