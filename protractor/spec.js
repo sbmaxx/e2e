@@ -24,6 +24,12 @@ describe('yandex.images index', function() {
         input.sendKeys('bmw');
         expect(input.getAttribute('value')).toEqual('bmw');
     });
+    it('should do search', function() {
+        var button = $('.search .button');
+        button.click();
+        browser.sleep(1000);
+        expect(browser.getTitle()).toMatch(/bmw: \d+ тыс изображений найдено в Яндекс.Картинках/);
+    });
 
 });
 
