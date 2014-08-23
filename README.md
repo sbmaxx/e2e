@@ -69,3 +69,13 @@ UnknownError: The driver executable does not exist: /usr/local/lib/node_modules/
 ==== async task ====
 
 ```
+
+`protractor protractor/conf.js`
+
+Ошибка
+
+```
+  1) yandex.images index should open
+   Message:
+     Error: Angular could not be found on the page http://yandex.ru/images : retries looking for angular exceeded
+```
