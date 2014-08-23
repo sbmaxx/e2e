@@ -24,7 +24,7 @@ casper.test.begin('yandex.images index', function(test) {
 
     casper.then(function() {
         this.scrollToBottom();
-    })
+    });
 
     for(var i = 0; i < 4; i++) {
         casper.waitWhileVisible('.more_direction_next .spinner', function() {
