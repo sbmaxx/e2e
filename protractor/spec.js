@@ -7,7 +7,13 @@ describe('angularjs homepage', function() {
 
     element(by.id('gobutton')).click();
 
-    expect(element(by.binding('latest')).getText()).
-        toEqual('5'); // This is wrong!
+    expect(element(by.binding('latest')).getText()).toEqual('3'); // This is wrong!
   });
+});
+
+describe('yandex.images index', function() {
+    it('should open', function() {
+        browser.get('http://yandex.ru/images');
+        expect(browser.getTitle()).toEqual('Яндекс.Картинки: поиск изображений в интернете');
+    })
 });
