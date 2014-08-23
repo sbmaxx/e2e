@@ -14,10 +14,17 @@
 describe('yandex.images index', function() {
     // это аффектит первый describe, который начинает фейлится
     browser.ignoreSynchronization = true;
+    browser.get('http://yandex.ru/images');
+
     it('should open', function() {
-        browser.get('http://yandex.ru/images');
         expect(browser.getTitle()).toEqual('Яндекс.Картинки: поиск изображений в интернете');
-    })
+    });
+    it('should fill input', function() {
+        var input = $('.search .input__control');
+        input.sendKeys('bmw');
+        expect(input.getAttribute('value')).toEqual('bmw');
+    });
+
 });
 
 describe('yandex.images index direct driver', function() {
