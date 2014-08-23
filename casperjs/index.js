@@ -33,7 +33,7 @@ casper.test.begin('yandex.images index', function(test) {
     }
 
     casper.waitUntilVisible('.more_direction_next .button', function() {
-        test.assert(true, 'more button should be visible after scroll');
+        test.pass('more button should be visible after scroll');
     });
 
     casper.run(function() {
