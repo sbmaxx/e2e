@@ -2,6 +2,9 @@ casper.test.begin('yandex.images index', function(test) {
 
     casper.start('http://yandex.ru/images', function(response) {
         casper.viewport(1366, 900);
+    });
+
+    casper.then(function() {
         test.assertTitle('Яндекс.Картинки: поиск изображений в интернете');
 
         this.fill('.search', {
