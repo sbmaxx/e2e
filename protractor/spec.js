@@ -12,8 +12,6 @@
 // });
 
 describe('yandex.images index', function() {
-    // это аффектит первый describe, который начинает фейлится
-    browser.ignoreSynchronization = true;
     browser.get('http://yandex.ru/images');
 
     it('should open', function() {
@@ -30,7 +28,12 @@ describe('yandex.images index', function() {
         browser.sleep(1000);
         expect(browser.getTitle()).toMatch(/bmw: \d+ тыс изображений найдено в Яндекс.Картинках/);
     });
-
+    it('more button should be visible after scroll', function() {
+        browser.executeScript('window.scrollTo(0,document.documentElement.scrollHeight);').then(function () {
+            var button = $('.more_direction_next');
+            expect(button.getAttribute('class')).not.toMatch('more__button_hidden_yes');
+        });
+    });
 });
 
 describe('yandex.images index direct driver', function() {
