@@ -10,6 +10,12 @@ sudo rm /usr/local/lib/node_modules/protractor/selenium/selenium-server-standalo
 sudo webdriver-manager update
 webdriver-manager start
 protractor conf.js
+sudo rm -rf /usr/local/lib/node_modules/protractor/selenium/chromedriver_2.10.zip
+sudo webdriver-manager update
+DOWNLOAD http://chromedriver.storage.googleapis.com/index.html?path=2.10/
+sudo cp ~/Downloads/chromedriver /usr/local/lib/node_modules/protractor/selenium/
+DOWNLOAD http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar
+sudo cp ~/Downloads/selenium-server-standalone-2.42.2.jar /usr/local/lib/node_modules/protractor/selenium
 ```
 
 ```
