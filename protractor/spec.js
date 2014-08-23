@@ -17,23 +17,27 @@ describe('yandex.images index', function() {
     it('should open', function() {
         expect(browser.getTitle()).toEqual('Яндекс.Картинки: поиск изображений в интернете');
     });
+
     it('should fill input', function() {
         var input = $('.search .input__control');
         input.sendKeys('bmw');
         expect(input.getAttribute('value')).toEqual('bmw');
     });
+
     it('should do search', function() {
         var button = $('.search .button');
         button.click();
         browser.sleep(1000);
         expect(browser.getTitle()).toMatch(/bmw: \d+ тыс изображений найдено в Яндекс.Картинках/);
     });
+
     it('more button should be visible after scroll', function() {
-        browser.executeScript('window.scrollTo(0,document.documentElement.scrollHeight);').then(function () {
+        browser.executeScript('window.scrollTo(0,document.documentElement.scrollHeight);').then(function() {
             var button = $('.more_direction_next');
             expect(button.getAttribute('class')).not.toMatch('more__button_hidden_yes');
         });
     });
+
 });
 
 describe('yandex.images index direct driver', function() {
