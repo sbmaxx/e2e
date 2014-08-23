@@ -3,5 +3,5 @@ exports.config = {
   specs: ['spec.js'],
   onPrepare: function() {
     browser.ignoreSynchronization = true;
-    }
+  }
 }

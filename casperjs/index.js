@@ -1,8 +1,33 @@
-casper.test.begin('ya.ru', function(test) {
-    casper.start('http://ya.ru', function(response) {
-        test.assertTitle('Яндекс', 'correct title');
-        test.assertSelectorHasText('.copy-wrap .left span', '© 1997—' + (new Date()).getFullYear(), 'correct copyright date');
-    }).run(function() {
+casper.test.begin('yandex.images index', function(test) {
+
+    casper.start('http://yandex.ru/images', function(response) {
+        casper.viewport(1366, 900);
+        test.assertTitle('Яндекс.Картинки: поиск изображений в интернете');
+        this.fill('.search', {
+            text: 'bmw'
+        }, false);
+        test.assertField('text', 'bmw');
+    });
+
+    casper.then(function() {
+        this.click('.search .button');
+        this.wait(1000, function() {
+            test.assertTitleMatches(/bmw: \d+ тыс изображений найдено в Яндекс.Картинках/);
+        });
+    });
+
+    casper.then(function() {
+        this.scrollToBottom();
+    });
+
+    casper.then(function() {
+        this.wait(1000, function() {
+            test.assertVisible('.more_direction_next');
+        });
+    });
+
+    casper.run(function() {
         test.done();
     });
+
 });
