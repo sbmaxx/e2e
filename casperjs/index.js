@@ -6,9 +6,6 @@ casper.test.begin('yandex.images index', function(test) {
 
     casper.start('http://yandex.ru/images', function(response) {
         casper.viewport(1300, 900);
-    });
-
-    casper.then(function() {
 
         test.assertTitle('Яндекс.Картинки: поиск изображений в интернете', 'should be index page');
 
@@ -19,7 +16,6 @@ casper.test.begin('yandex.images index', function(test) {
         test.assertField('text', 'bmw', 'should fill input with "bmw"');
 
         this.click('.search .button');
-
     });
 
     casper.waitWhileVisible('.fade', function() {
@@ -37,9 +33,7 @@ casper.test.begin('yandex.images index', function(test) {
 
     casper.waitUntilVisible('.more_direction_next .button', function() {
         test.pass('more button should be visible after scroll');
-    });
 
-    casper.then(function() {
         this.fill('.search', {
             text: 'audi'
         }, false);
@@ -51,9 +45,6 @@ casper.test.begin('yandex.images index', function(test) {
 
     casper.waitWhileVisible('.fade', function() {
         test.assertTitleMatches(/audi: \d+ тыс изображений найдено в Яндекс.Картинках/, 'should do search for "audi"');
-    });
-
-    casper.then(function() {
         this.click('.search .service__url');
     });
 
@@ -72,9 +63,7 @@ casper.test.begin('yandex.images index', function(test) {
         test.assertVisible('.pane', 'pane should be visible');
         test.assertExists('.serp-item_selected_yes', 'image should be selected');
         test.assertExists('.serp-item_selected_yes.serp-item_pos_0', 'first image should be selected');
-    });
 
-    casper.then(function() {
         // this can through warning, because we have prevent default on forms
         this.fill('.search', {
             text: 'пластиковые окна'
