@@ -58,7 +58,7 @@ describe('yandex.images index', function() {
 
     it('should fill input with audi', function() {
         var input = $('.search .input__control');
-        input.clear()
+        input.clear();
         input.sendKeys('audi');
         expect(input.getAttribute('value')).toEqual('audi');
     });
