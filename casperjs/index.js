@@ -24,12 +24,10 @@ casper.test.begin('yandex.images index', function(test) {
 
     casper.waitWhileVisible('.fade', function() {
         test.assertTitleMatches(/bmw: \d+ тыс изображений найдено в Яндекс.Картинках/, 'should do search for "bmw"');
-    });
-
-    casper.then(function() {
         this.scrollToBottom();
     });
 
+    // do a lot of scroll like user does
     for(var i = 0; i < 4; i++) {
         casper.waitWhileVisible('.more_direction_next .spinner', function() {
             test.pass('loader on scroll');
@@ -84,23 +82,10 @@ casper.test.begin('yandex.images index', function(test) {
     });
 
     casper.waitWhileVisible('.fade').then(function() {
-        test.assertExists('.serp-item_pos_3', 'have some unselected items');
         // we really need two mouse move for now :/
         this.mouse.move('.serp-item_pos_3');
         this.mouse.move('.serp-item_pos_3');
     });
-
-    // casper.then(function() {
-    //     var bounds = this.getElementBounds('.serp-item_pos_3')
-    //     this.evaluate(function(bounds) {
-    //         var event = $.Event('mousemove');
-    //         e.pageX = bounds.left + 20;
-    //         e.pageY = bounds.top + 20;
-    //         $('.serp_item_pos_3').trigger(event);
-    //     }, bounds);
-    //     this.mouse.move(bounds.left + 30, bounds.top + 40);
-    //     this.mouse.move(bounds.left + 40, bounds.top + 50);
-    // })
 
     casper.waitUntilVisible('.serp-item_hovered_yes', function() {
         test.pass('item should be hovered');
