@@ -2,6 +2,8 @@
 
 casper.test.begin('yandex.images index', function(test) {
 
+    // casper.userAgent('Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36');
+
     casper.start('http://yandex.ru/images', function(response) {
         casper.viewport(1300, 900);
     });
@@ -81,23 +83,23 @@ casper.test.begin('yandex.images index', function(test) {
     });
 
     casper.waitWhileVisible('.fade').then(function() {
-        casper.mouseEvent('mouseover', '.serp-item_pos_2');
-        this.mouse.move('.serp-item_pos_2');
-        test.assertExists('.serp-item_pos_3');
-        casper.log('Is polaroid disabled polaroid: ', this.evaluate(function() {
-            return BEM.blocks["i-global"].param("disablePolaroid");
-        }));
+        test.assertExists('.serp-item_pos_3', 'have some unselected items');
+        // we really need two mouse move for now :/
+        this.mouse.move('.serp-item_pos_3');
+        this.mouse.move('.serp-item_pos_3');
     });
 
-    casper.then(function() {
-        var bounds = this.getElementBounds('.serp-item_pos_3')
-        this.evaluate(function(bounds) {
-            var event = $.Event('mousemove');
-            e.pageX = bounds.left + 20;
-            e.pageY = bounds.top + 20;
-            $('.serp_item_pos_3').trigger();
-        }, bounds);
-    });
+    // casper.then(function() {
+    //     var bounds = this.getElementBounds('.serp-item_pos_3')
+    //     this.evaluate(function(bounds) {
+    //         var event = $.Event('mousemove');
+    //         e.pageX = bounds.left + 20;
+    //         e.pageY = bounds.top + 20;
+    //         $('.serp_item_pos_3').trigger(event);
+    //     }, bounds);
+    //     this.mouse.move(bounds.left + 30, bounds.top + 40);
+    //     this.mouse.move(bounds.left + 40, bounds.top + 50);
+    // })
 
     casper.waitUntilVisible('.serp-item_hovered_yes', function() {
         test.pass('item should be hovered');
