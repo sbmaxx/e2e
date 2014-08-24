@@ -56,6 +56,20 @@ describe('yandex.images index', function() {
         expect(button.getAttribute('class')).not.toMatch('more__button_hidden_yes');
     });
 
+    it('should fill input with audi', function() {
+        var input = $('.search .input__control');
+        input.clear()
+        input.sendKeys('audi');
+        expect(input.getAttribute('value')).toEqual('audi');
+    });
+
+    it('should do search for audi', function() {
+        var button = $('.search .button');
+        button.click();
+        browser.sleep(1000);
+        expect(browser.getTitle()).toMatch(/audi: \d+ тыс изображений найдено в Яндекс.Картинках/);
+    });
+
 });
 
 describe('yandex.images index direct driver', function() {
