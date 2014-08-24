@@ -32,6 +32,7 @@ casper.test.begin('yandex.images index', function(test) {
 
     for(var i = 0; i < 4; i++) {
         casper.waitWhileVisible('.more_direction_next .spinner', function() {
+            test.pass('loader on scroll');
             this.scrollToBottom();
         });
     }
