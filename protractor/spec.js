@@ -12,6 +12,9 @@
 // });
 
 describe('yandex.images index', function() {
+
+    browser.driver.manage().window().setSize(1300, 900);
+
     browser.get('http://yandex.ru/images');
 
     it('should open', function() {
@@ -69,6 +72,8 @@ describe('yandex.images index', function() {
         browser.sleep(1000);
         expect(browser.getTitle()).toMatch(/audi: \d+ тыс изображений найдено в Яндекс.Картинках/);
     });
+
+    browser.driver.manage().window().setSize(1500, 900);
 
 });
 
