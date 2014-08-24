@@ -71,6 +71,7 @@ describe('yandex.images index', function() {
         button.click();
         browser.sleep(1000);
         expect(browser.getTitle()).toMatch(/audi: \d+ тыс изображений найдено в Яндекс.Картинках/);
+        expect($('.pane').isDisplayed()).toEqual(false);
     });
 
     browser.driver.manage().window().setSize(1500, 900);
