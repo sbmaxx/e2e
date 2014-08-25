@@ -29,7 +29,7 @@ casper.test.begin('yandex.images index', function(test) {
             // check while the spinner is visible
             casper.waitWhileVisible('.more_direction_next .spinner', function() {
                 test.pass('loader on scroll');
-                // do another scorll
+                // do another scroll
                 this.scrollToBottom();
             });
         }
