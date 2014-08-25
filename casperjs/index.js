@@ -65,18 +65,22 @@ casper.test.begin('yandex.images index', function(test) {
     // do browser navigation back and wait until b-page change mod
     casper.back().waitUntilVisible('.b-page_type_search', function() {
         test.assertTitleMatches(/audi: \d+ тыс изображений найдено в Яндекс.Картинках/, 'should back to "audi" query');
+    });
+
+    // check pane visible/hidden with various viewports
+    casper.then(function() {
         // for this viewport we should not see the pane or any selected serp-items
         test.assertNotVisible('.pane', 'pane should not be visible on this viewport');
         test.assertDoesntExist('.serp-item_selected_yes', 'no image should be selected');
-        casper.viewport(1500, 900);
+
+        casper.viewport(1500, 900).then(function() {
+            test.assertVisible('.pane', 'pane should be visible');
+            test.assertExists('.serp-item_selected_yes', 'image should be selected');
+            test.assertExists('.serp-item_selected_yes.serp-item_pos_0', 'first image should be selected');
+        });
     });
 
-    // wait for viewport changed
     casper.then(function() {
-        test.assertVisible('.pane', 'pane should be visible');
-        test.assertExists('.serp-item_selected_yes', 'image should be selected');
-        test.assertExists('.serp-item_selected_yes.serp-item_pos_0', 'first image should be selected');
-
         // this can through warning, because we have prevent default on forms
         // fill && submit
         this.fill('.search', {
@@ -86,15 +90,17 @@ casper.test.begin('yandex.images index', function(test) {
 
     // wait for new searchdata
     casper.waitWhileVisible('.fade').then(function() {
+
         // we really need two mouse move for now :/
         this.mouse.move('.serp-item_pos_3');
         this.mouse.move('.serp-item_pos_3');
-    });
 
-    // hovered_yes run via setTimeout, so wait for it
-    casper.waitUntilVisible('.serp-item_hovered_yes', function() {
-        test.pass('item should be hovered');
-        test.assertVisible('.serp-item_pos_3 .serp-item__snippet', 'snippet should be visible');
+        // hovered_yes run via setTimeout, so wait for it
+        casper.waitUntilVisible('.serp-item_hovered_yes', function() {
+            test.pass('item should be hovered');
+            test.assertVisible('.serp-item_pos_3 .serp-item__snippet', 'snippet should be visible');
+        });
+
     });
 
     casper.run(function() {
