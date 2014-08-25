@@ -22,18 +22,18 @@ casper.test.begin('yandex.images index', function(test) {
     // wait while the page is loading
     casper.waitWhileVisible('.fade', function() {
         test.assertTitleMatches(/bmw: \d+ тыс изображений найдено в Яндекс.Картинках/, 'should do search for "bmw"');
-        this.scrollToBottom();
-    });
 
-    // do a lot of scroll like user does
-    for(var i = 0; i < 4; i++) {
-        // check while the spinner is visible
-        casper.waitWhileVisible('.more_direction_next .spinner', function() {
-            test.pass('loader on scroll');
-            // do another scorll
-            this.scrollToBottom();
-        });
-    }
+        this.scrollToBottom();
+        // do a lot of scroll like user does
+        for(var i = 0; i < 4; i++) {
+            // check while the spinner is visible
+            casper.waitWhileVisible('.more_direction_next .spinner', function() {
+                test.pass('loader on scroll');
+                // do another scorll
+                this.scrollToBottom();
+            });
+        }
+    });
 
     // whait for button became visible
     casper.waitUntilVisible('.more_direction_next .button', function() {
