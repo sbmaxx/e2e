@@ -60,12 +60,17 @@ describe('yandex.images index', function() {
     });
 
     it('should display pane', function() {
+        expect(browser.isElementPresent($('.serp-item_selected_yes'))).toEqual(false);
         expect($('.pane').isDisplayed()).toEqual(false);
         browser.driver.manage().window().setSize(1500, 900);
+        browser.sleep(1000);
         expect($('.pane').isDisplayed()).toEqual(true);
+        expect(browser.isElementPresent($('.serp-item_selected_yes'))).toEqual(true);
+        expect(browser.isElementPresent($('.serp-item_pos_0.serp-item_selected_yes'))).toEqual(false);
     });
 
     it('should go to index', function() {
+        browser.sleep(100);
         $('.search .service__url').click();
         browser.sleep(1000);
         expect(browser.getTitle()).toEqual('Яндекс.Картинки: поиск изображений в интернете');
