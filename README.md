@@ -1,7 +1,22 @@
 e2e
 ===
 
-protractor
+**Full Test's time**:
+* casperjs — 6 seconds
+* protractor — 18.5 seconds
+
+Run
+====
+```
+make casperjs
+make protractor
+```
+or just `make to run both ;)`
+
+Before running protractor don't forget to execute `webdriver-manager start`.
+
+
+protractor installation workarounds
 ====
 ```bash
 wget http://download.oracle.com/otn-pub/java/jdk/8u20-b26/jdk-8u20-macosx-x64.dmgs
@@ -15,8 +30,3 @@ wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standal
 sudo chromedriver /usr/local/lib/node_modules/protractor/selenium/
 sudo selenium-server-standalone-2.42.2.jar /usr/local/lib/node_modules/protractor/selenium
 ```
-
-Run
-====
-`protractor protractor/conf.js`
-`casperjs test casperjs/index.js`
