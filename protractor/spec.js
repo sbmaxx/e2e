@@ -21,22 +21,22 @@ describe('yandex.images index', function() {
     });
 
     it('loader on scroll', function() {
-            browser.executeScript('window.scrollTo(0,document.documentElement.scrollHeight);').then(function() {
-                expect(browser.isElementPresent($('.more_direction_next .spinner'))).toEqual(true);
-            });
-            browser.sleep(500);
-            browser.executeScript('window.scrollTo(0,document.documentElement.scrollHeight);').then(function() {
-                expect(browser.isElementPresent($('.more_direction_next .spinner'))).toEqual(true);
-            });
-            browser.sleep(500);
-            browser.executeScript('window.scrollTo(0,document.documentElement.scrollHeight);').then(function() {
-                expect(browser.isElementPresent($('.more_direction_next .spinner'))).toEqual(true);
-            });
-            browser.sleep(500);
-            browser.executeScript('window.scrollTo(0,document.documentElement.scrollHeight);').then(function() {
-                expect(browser.isElementPresent($('.more_direction_next .spinner'))).toEqual(true);
-            });
-            browser.sleep(500);
+        browser.executeScript('window.scrollTo(0,document.documentElement.scrollHeight);').then(function() {
+            expect(browser.isElementPresent($('.more_direction_next .spinner'))).toEqual(true);
+        });
+        browser.sleep(500);
+        browser.executeScript('window.scrollTo(0,document.documentElement.scrollHeight);').then(function() {
+            expect(browser.isElementPresent($('.more_direction_next .spinner'))).toEqual(true);
+        });
+        browser.sleep(500);
+        browser.executeScript('window.scrollTo(0,document.documentElement.scrollHeight);').then(function() {
+            expect(browser.isElementPresent($('.more_direction_next .spinner'))).toEqual(true);
+        });
+        browser.sleep(500);
+        browser.executeScript('window.scrollTo(0,document.documentElement.scrollHeight);').then(function() {
+            expect(browser.isElementPresent($('.more_direction_next .spinner'))).toEqual(true);
+        });
+        browser.sleep(500);
     });
 
     // not correct test but at least..
@@ -69,7 +69,6 @@ describe('yandex.images index', function() {
         expect(browser.isElementPresent($('.b-page_type_index'))).toEqual(true);
     });
 
-
     it('should back to search', function() {
         browser.driver.navigate().back();
         browser.sleep(1000);
@@ -89,9 +88,4 @@ describe('yandex.images index', function() {
         expect(browser.isElementPresent($('.serp-item_pos_3.serp-item_hovered_yes'))).toEqual(true);
     });
 
-});
-
-describe('yandex.images index direct driver', function() {
-    browser.driver.get('http://yandex.ru/images');
-    expect(browser.driver.getTitle()).toEqual('Яндекс.Картинки: поиск изображений в интернете');
 });
