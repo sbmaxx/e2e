@@ -32,7 +32,7 @@ Run
 make casperjs
 make protractor
 ```
-or just `make to run both ;)`
+or just `make` to run both ;).
 
 Before running protractor don't forget to execute `webdriver-manager start`.
 
