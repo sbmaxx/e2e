@@ -57,6 +57,9 @@ describe('yandex.images index', function() {
         button.click();
         browser.sleep(1000);
         expect(browser.getTitle()).toMatch(/audi: \d+ тыс изображений найдено в Яндекс.Картинках/);
+    });
+
+    it('should display pane', function() {
         expect($('.pane').isDisplayed()).toEqual(false);
         browser.driver.manage().window().setSize(1500, 900);
         expect($('.pane').isDisplayed()).toEqual(true);
@@ -75,7 +78,7 @@ describe('yandex.images index', function() {
         expect(browser.getTitle()).toMatch(/audi: \d+ тыс изображений найдено в Яндекс.Картинках/);
     });
 
-    it('have some unselected items', function() {
+    it('should hover serp-items on mouse move', function() {
         var input = $('.search .input__control');
         input.clear();
         input.sendKeys('пластиковые окна');
