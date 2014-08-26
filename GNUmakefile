@@ -3,6 +3,7 @@ default: casperjs protractor
 
 casperjs:
 	casperjs test casperjs/index.js
+	mocha-casperjs casperjs/mocha.js
 
 protractor:
 	protractor protractor/conf.js
