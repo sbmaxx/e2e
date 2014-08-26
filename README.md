@@ -39,7 +39,7 @@ Before running protractor don't forget to execute `webdriver-manager start`.
 Installing casperjs
 ====
 ```sudo npm install -g casperjs```
-If you want to use **mocha-casperjs** — ```sudo npm install -g mocha-casperjs chai```
+If you want to use **mocha-casperjs** — ```sudo npm install -g mocha-casperjs mocha chai```
 
 protractor installation workarounds
 ====

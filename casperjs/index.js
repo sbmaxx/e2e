@@ -4,9 +4,9 @@ casper.test.begin('yandex.images index', function(test) {
 
     // casper.userAgent('Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36');
 
-    casper.start('http://yandex.ru/images', function(response) {
-        casper.viewport(1300, 900);
+    casper.start().viewport(1300, 900);
 
+    casper.thenOpen('http://yandex.ru/images', function(response) {
         test.assertTitle('Яндекс.Картинки: поиск изображений в интернете', 'should be index page');
 
         // fill form without submit
@@ -75,18 +75,18 @@ casper.test.begin('yandex.images index', function(test) {
 
 casper.test.begin('viewports', 7, function(test) {
 
-    casper.start('http://yandex.ru/images/search?text=bmw', function(response) {
-        casper.viewport(1300, 900).then(function() {
-            // for this viewport we should not see the pane or any selected serp-items
-            test.assertNotVisible('.pane', 'pane should not be visible on this viewport');
-            test.assertDoesntExist('.serp-item_selected_yes', 'no image should be selected');
+    casper.start().viewport(1300, 900);
 
-            casper.viewport(1500, 900).then(function() {
-                test.assertVisible('.pane', 'pane should be visible');
-                test.assertExists('.serp-item_selected_yes', 'image should be selected');
-                test.assertExists('.serp-item_selected_yes.serp-item_pos_0', 'first image should be selected');
-            });
-        });
+    casper.thenOpen('http://yandex.ru/images/search?text=bmw', function(response) {
+        // for this viewport we should not see the pane or any selected serp-items
+        test.assertNotVisible('.pane', 'pane should not be visible on this viewport');
+        test.assertDoesntExist('.serp-item_selected_yes', 'no image should be selected');
+    });
+
+    casper.viewport(1500, 900).then(function() {
+        test.assertVisible('.pane', 'pane should be visible');
+        test.assertExists('.serp-item_selected_yes', 'image should be selected');
+        test.assertExists('.serp-item_selected_yes.serp-item_pos_0', 'first image should be selected');
     });
 
     casper.then(function() {
