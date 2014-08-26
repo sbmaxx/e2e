@@ -1,4 +1,4 @@
-// require("utils").dump(casper.cli.options);
+require("utils").dump(casper.cli.options);
 
 casper.test.begin('yandex.images index', function(test) {
 
@@ -82,7 +82,6 @@ casper.test.begin('viewports', 7, function(test) {
             test.assertDoesntExist('.serp-item_selected_yes', 'no image should be selected');
 
             casper.viewport(1500, 900).then(function() {
-                casper.capture('ololo.png');
                 test.assertVisible('.pane', 'pane should be visible');
                 test.assertExists('.serp-item_selected_yes', 'image should be selected');
                 test.assertExists('.serp-item_selected_yes.serp-item_pos_0', 'first image should be selected');
@@ -121,7 +120,10 @@ casper.test.begin('viewports', 7, function(test) {
 
 casper.test.begin('yandex.images mispell', 2, function(test) {
 
-    casper.start('http://yandex.ru/images', function(response) {
+    casper.start();
+    casper.viewport(1300, 900);
+
+    casper.thenOpen('http://yandex.ru/images', function(response) {
         this.fill('.search', {
             text: 'жывотное'
         }, true);
