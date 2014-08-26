@@ -67,16 +67,26 @@ casper.test.begin('yandex.images index', function(test) {
         test.assertTitleMatches(/audi: \d+ тыс изображений найдено в Яндекс.Картинках/, 'should back to "audi" query');
     });
 
-    // check pane visible/hidden with various viewports
-    casper.then(function() {
-        // for this viewport we should not see the pane or any selected serp-items
-        test.assertNotVisible('.pane', 'pane should not be visible on this viewport');
-        test.assertDoesntExist('.serp-item_selected_yes', 'no image should be selected');
+    casper.run(function() {
+        test.done();
+    });
 
-        casper.viewport(1500, 900).then(function() {
-            test.assertVisible('.pane', 'pane should be visible');
-            test.assertExists('.serp-item_selected_yes', 'image should be selected');
-            test.assertExists('.serp-item_selected_yes.serp-item_pos_0', 'first image should be selected');
+});
+
+casper.test.begin('viewports', 7, function(test) {
+
+    casper.start('http://yandex.ru/images/search?text=bmw', function(response) {
+        casper.viewport(1300, 900).then(function() {
+            // for this viewport we should not see the pane or any selected serp-items
+            test.assertNotVisible('.pane', 'pane should not be visible on this viewport');
+            test.assertDoesntExist('.serp-item_selected_yes', 'no image should be selected');
+
+            casper.viewport(1500, 900).then(function() {
+                casper.capture('ololo.png');
+                test.assertVisible('.pane', 'pane should be visible');
+                test.assertExists('.serp-item_selected_yes', 'image should be selected');
+                test.assertExists('.serp-item_selected_yes.serp-item_pos_0', 'first image should be selected');
+            });
         });
     });
 
@@ -101,6 +111,25 @@ casper.test.begin('yandex.images index', function(test) {
             test.assertVisible('.serp-item_pos_3 .serp-item__snippet', 'snippet should be visible');
         });
 
+    });
+
+    casper.run(function() {
+        test.done();
+    });
+
+});
+
+casper.test.begin('yandex.images mispell', 2, function(test) {
+
+    casper.start('http://yandex.ru/images', function(response) {
+        this.fill('.search', {
+            text: 'жывотное'
+        }, true);
+    });
+
+    casper.waitUntilVisible('.b-page_type_search', function() {
+        test.pass();
+        test.assertVisible('.misspell');
     });
 
     casper.run(function() {
